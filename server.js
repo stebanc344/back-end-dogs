@@ -6,6 +6,7 @@ const mongoose = require("mongoose");
 const cors = require("cors");
 const logger = require("morgan"); 
 const Dog = require('./models/Dog');
+
 const dogRoutes = require("./routes/dogs");
 
 
@@ -28,11 +29,11 @@ app.use(logger('dev'));
 // Routes
 app.use("/dogs", dogRoutes);
 
-/*app.get('/', (req, res) => {
+app.get('/', (req, res) => {
     res.send('Welcome to the Dog API!');
   });
 
-app.get('/dogs', async (req, res) => {
+/*app.get('/dogs', async (req, res) => {
     try {
       const dogs = await Dog.find();
       res.json(dogs);
