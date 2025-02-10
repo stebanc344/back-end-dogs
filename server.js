@@ -33,7 +33,7 @@ app.get('/', (req, res) => {
     res.send('Welcome to the Dog API!');
   });
 
-/*app.get('/dogs', async (req, res) => {
+app.get('/dogs', async (req, res) => {
     try {
       const dogs = await Dog.find();
       res.json(dogs);
@@ -64,5 +64,5 @@ app.post('/dogs', async (req, res) => {
       res.status(500).json({ message: err.message });
     }
   });
-*/
+
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
