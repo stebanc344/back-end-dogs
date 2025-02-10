@@ -7,7 +7,7 @@ const cors = require("cors");
 const logger = require("morgan"); 
 const Dog = require('./models/Dog');
 
-const dogRoutes = require("./routes/dogs");
+const dogRoutes = require("./routes/dogs.js");
 
 
 const PORT = process.env.PORT || 3000;
