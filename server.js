@@ -26,9 +26,9 @@ app.use(cors())
 const dogRoutes = require("./routes/dogs");
 app.use("/dogs", dogRoutes);
 
-app.get('/dogs', (req, res) => {
+app.get('/', (req, res) => {
     res.send('Welcome to the Dog API!');
-  }); 
+  });
   
   
   app.post('/dogs', async (req, res) => {
