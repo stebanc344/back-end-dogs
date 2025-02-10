@@ -29,7 +29,7 @@ app.use(logger('dev'));
 // Routes
 app.use("/dogs", dogRoutes);
 
-app.get('/', (req, res) => {
+app.get('/dogs', (req, res) => {
     res.send('Welcome to the Dog API!');
   });
 
