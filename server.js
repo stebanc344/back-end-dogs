@@ -5,6 +5,7 @@ const mongoose = require("mongoose");
 const cors = require("cors");
 const logger = require("morgan"); 
 const Dog = require('./models/Dog');
+const dogRoutes = require("./routes/dogs");
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -21,17 +22,24 @@ mongoose.connection.on('connected', () => {
 app.use(express.json())
 app.use(logger('dev'))
 app.use(cors())
-
-// Routes
-const dogRoutes = require("./routes/dogs");
 app.use("/dogs", dogRoutes);
 
+// Routes
 app.get('/', (req, res) => {
     res.send('Welcome to the Dog API!');
   });
+
+app.get('/dogs', async (req, res) => {
+    try {
+      const dogs = await Dog.find();
+      res.json(dogs);
+    } catch (err) {
+      res.status(500).json({ message: err.message });
+    }
+  });
   
   
-  app.post('/dogs', async (req, res) => {
+app.post('/dogs', async (req, res) => {
     const { name, breed, image } = req.body;
     const newDog = new Dog({ name, breed, image });
   
