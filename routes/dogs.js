@@ -2,6 +2,17 @@ const express = require("express");
 const router = express.Router();
 const Dog = require("../models/Dog");
 
+// Create a new dog
+router.post("/", async (req, res) => {
+  try {
+    const newDog = new Dog(req.body);
+    await newDog.save();
+    res.status(201).json(newDog);
+  } catch (err) {
+    res.status(400).json({ message: err.message });
+  }
+});
+
 // Get all dogs
 router.get("/", async (req, res) => {
   try {
@@ -11,6 +22,8 @@ router.get("/", async (req, res) => {
     res.status(500).json({ message: err.message });
   }
 });
+
+
 
 // Get a single dog
 router.get("/:id", async (req, res) => {
@@ -23,16 +36,7 @@ router.get("/:id", async (req, res) => {
   }
 });
 
-// Create a new dog
-router.post("/", async (req, res) => {
-  try {
-    const newDog = new Dog(req.body);
-    await newDog.save();
-    res.status(201).json(newDog);
-  } catch (err) {
-    res.status(400).json({ message: err.message });
-  }
-});
+
 
 // Update a dog
 router.put("/:id", async (req, res) => {
