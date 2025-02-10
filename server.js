@@ -1,13 +1,14 @@
 const dotenv = require("dotenv");
 dotenv.config();
 const express = require("express");
+const app = express();
 const mongoose = require("mongoose");
 const cors = require("cors");
 const logger = require("morgan"); 
 const Dog = require('./models/Dog');
-//const dogRoutes = require("./routes/dogs");
+const dogRoutes = require("./routes/dogs");
 
-const app = express();
+
 const PORT = process.env.PORT || 3000;
 
 // Connect to MongoDB
@@ -19,15 +20,15 @@ mongoose.connection.on('connected', () => {
 });
 
 // universal middleware
-app.use(express.json())
-app.use(logger('dev'))
-app.use(cors())
+app.use(cors());
+app.use(express.json());
+app.use(logger('dev'));
 
 
 // Routes
-//app.use("/dogs", dogRoutes);
+app.use("/dogs", dogRoutes);
 
-app.get('/', (req, res) => {
+/*app.get('/', (req, res) => {
     res.send('Welcome to the Dog API!');
   });
 
@@ -62,5 +63,5 @@ app.post('/dogs', async (req, res) => {
       res.status(500).json({ message: err.message });
     }
   });
-
+*/
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
